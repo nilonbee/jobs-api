@@ -32,7 +32,7 @@ app.use(cors());
 // routes
 app.use("/api/v1/auth", authRouter);
 app.use("/api/v1/jobs", authenticateUser, jobsRouter);
-app.send("/", (req, res) => {
+app.get("/", (req, res) => {
   res.send("JOBS_API");
 });
 
