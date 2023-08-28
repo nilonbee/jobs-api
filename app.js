@@ -32,6 +32,9 @@ app.use(cors());
 // routes
 app.use("/api/v1/auth", authRouter);
 app.use("/api/v1/jobs", authenticateUser, jobsRouter);
+app.send("/", (req, res) => {
+  res.send("JOBS_API");
+});
 
 //middlewares
 app.use(notFoundMiddleware);
@@ -44,7 +47,6 @@ const start = async () => {
     await connectDB(process.env.MONGO_URI);
     app.listen(port, () => {
       `App ls listening on port ${port}...`;
-      displayPyramid(5);
     });
   } catch (error) {
     console.log(error);
