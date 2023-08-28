@@ -7,6 +7,11 @@ const app = express();
 const connectDB = require("./db/connect");
 const authenticateUser = require("./middleware/authentication");
 
+// Swagger
+const swaggerUi = require("swagger-ui-express");
+const YAML = require("yamljs");
+const swaggerDocs = YAML.load("./swagger.yaml");
+
 // extra security packages
 const helmet = require("helmet");
 const xss = require("xss-clean");
@@ -33,14 +38,15 @@ app.use(cors());
 app.use("/api/v1/auth", authRouter);
 app.use("/api/v1/jobs", authenticateUser, jobsRouter);
 app.get("/", (req, res) => {
-  res.send("JOBS_API");
+  res.send("<h1>API Docs</h1><a href='/api-docs'>Documentation</a>");
 });
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 
 //middlewares
 app.use(notFoundMiddleware);
 app.use(errorHandlerMiddleware);
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 5000;
 
 const start = async () => {
   try {
