@@ -67,5 +67,5 @@ Swagger UI
       required: true
       description: the job id
 ```
-SWAGGER URL: https://dashboard.heroku.com/apps/nilan-jobs-api```
+SWAGGER URL: https://nilan-jobs-api-f7d6a6028895.herokuapp.com/api-docs/
 ```
